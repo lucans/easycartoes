@@ -1,0 +1,8 @@
+.card-action img{
+	margin: 7px;
+	height: 30px;
+}
+
+.clickable{
+	cursor: pointer;
+}

@@ -1,0 +1,96 @@
+<div ng-controller="userCtrl">
+  <div class="row">
+      <div class="col s3" ng-repeat="cartao in cartoes_recebidos">
+        <div class="card {{cartao.tamanho}} sticky-action" style="overflow: hidden;">
+        <img ng-src="http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png" title="Enviado por: {{cartao.de}} em {{cartao.dtenvio}}" height="40px" width="40px" style="position: absolute; z-index: 1000; margin: 5px;">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" ng-src="{{cartao.link_foto}}">          
+          </div>
+          <div class="card-content">        
+            <span class="card-title activator grey-text text-darken-4">
+              <center><b ng-bind="cartao.titulo"></b></center>
+              <i class="material-icons right">more_vert</i>
+            </span>
+          </div>
+          
+          <div class="card-action">    
+            <a class="btn col s10 offset-s1 purple lighten-2" href="" ng-click="abreModal(cartao)">Enviar este cartão</a>
+            <a class="btn col s10 offset-s1 teal lighten-3" style="margin-top: 3px;" href="#">Ver mais cartões de {{cartao.tema}}</a> 
+          </div>
+
+          <div class="card-reveal" style="display: none; transform: translateY(0px);">
+            <span class="card-title grey-text text-darken-4" ng-bind="cartao.titulo"><i class="material-icons right">close</i></span>
+            <div style="text-align: center;">           
+              <p ng-bind-html="cartao.texto"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">mode_edit</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+    <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+    <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+    <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+  </ul>
+</div>
+
+
+<!-- Modal enviaCartao -->
+<div id="enviarCartao" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <center>    
+      <h4 style="text-transform: uppercase;">{{cartao.titulo}}</h4>
+    </center>
+
+    <div class="row">
+      <form class="col s12">     
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="de" type="text" class="validate" ng-model="envio.de">
+            <label for="de">De:</label>
+          </div>
+        </div>      
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="para" type="text" class="validate" ng-model="envio.para">
+            <label for="para">Para:</label>
+          </div>
+        </div>      
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="email" type="text" class="validate" ng-model="envio.email">
+            <label for="email">Enviar para:</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <form class="col s12">
+             Sua mensagem:
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="mensagem" ng-model="envio.texto_caixa" ng-bind-html="cartao.texto_caixa" class="materialize-textarea"></textarea>              
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="purple lighten-2 white-text modal-action modal-close waves-effect btn-flat" ng-click="sendCartao(cartao, envio)">Enviar</a>
+  </div>
+</div>
+
+</div>
